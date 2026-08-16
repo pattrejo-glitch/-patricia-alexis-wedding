@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patricia &amp; Alexis — Save the Date</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Parisienne&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF6EC;
+    --cream-2:#FFEFDD;
+    --blush:#F6C9BE;
+    --marigold:#F2A65A;
+    --sunset:#C65146;
+    --wine:#5A2438;
+    --wine-2:#7A3350;
+    --gold:#D4A017;
+    --ink:#3E2723;
+    --max-w:1080px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Karla', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Playfair Display', serif; font-weight:600;}
+  .script{font-family:'Parisienne', cursive; font-weight:400;}
+  .eyebrow{
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-size:0.72rem;
+    font-weight:600;
+    color:var(--wine);
+    opacity:0.85;
+  }
+  .wrap{max-width:var(--max-w); margin:0 auto; padding:0 28px;}
+
+  /* ---------- LANG TOGGLE ---------- */
+  .lang-toggle{
+    position:fixed;
+    top:18px; right:18px;
+    z-index:50;
+    background:rgba(255,246,236,0.9);
+    border:1px solid var(--wine);
+    color:var(--wine);
+    font-family:'Karla', sans-serif;
+    font-weight:600;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    padding:8px 14px;
+    border-radius:30px;
+    cursor:pointer;
+    backdrop-filter:blur(4px);
+  }
+  .lang-toggle:hover{background:var(--wine); color:var(--cream);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 24px 60px;
+    background:
+      radial-gradient(120% 90% at 50% 100%, rgba(198,81,70,0.72) 0%, rgba(242,166,90,0.62) 42%, rgba(246,201,190,0.55) 68%, rgba(255,246,236,0.92) 100%),
+      url('photos/photo1.jpg');
+    background-size:cover;
+    background-position:center 30%;
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    bottom:-160px;
+    left:50%;
+    transform:translateX(-50%);
+    width:520px;
+    height:520px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,244,222,0.9) 0%, rgba(242,166,90,0.35) 55%, rgba(242,166,90,0) 75%);
+  }
+  .hero-content{position:relative; z-index:2;}
+  .hero .eyebrow{color:var(--cream); opacity:0.95; text-shadow:0 1px 8px rgba(90,36,56,0.35);}
+  .hero-names{
+    font-size:clamp(2.6rem, 8vw, 5.2rem);
+    margin:18px 0 6px;
+    text-shadow:0 2px 18px rgba(90,36,56,0.28);
+    letter-spacing:0.01em;
+  }
+  .hero-amp{
+    font-family:'Parisienne', cursive;
+    font-size:clamp(2.2rem, 6vw, 3.6rem);
+    display:block;
+    margin:4px 0;
+    color:#FFF3E4;
+  }
+  .hero-date{
+    margin-top:22px;
+    font-size:clamp(1.1rem, 3vw, 1.5rem);
+    letter-spacing:0.08em;
+    font-weight:600;
+  }
+  .hero-venue{
+    margin-top:8px;
+    font-size:1rem;
+    opacity:0.95;
+  }
+  .cal-btn{
+    margin-top:28px;
+    display:inline-block;
+    background:var(--cream);
+    color:var(--sunset);
+    font-weight:700;
+    font-size:0.82rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:13px 28px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(90,36,56,0.25);
+    position:relative;
+    z-index:2;
+  }
+  .cal-btn:hover{background:#FFF3E4;}
+  .cal-menu{
+    position:relative;
+    display:inline-block;
+    z-index:3;
+  }
+  .cal-options{
+    display:none;
+    position:absolute;
+    top:calc(100% + 8px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--cream);
+    border-radius:12px;
+    box-shadow:0 14px 30px rgba(90,36,56,0.3);
+    overflow:hidden;
+    min-width:200px;
+  }
+  .cal-options.open{display:block;}
+  .cal-options a{
+    display:block;
+    padding:12px 18px;
+    font-size:0.85rem;
+    color:var(--wine);
+    text-decoration:none;
+    text-align:left;
+    font-weight:600;
+  }
+  .cal-options a:hover{background:var(--cream-2);}
+  .hero-scroll{
+    position:absolute;
+    bottom:26px; left:50%; transform:translateX(-50%);
+    font-size:0.7rem;
+    letter-spacing:0.24em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:0.85;
+    z-index:2;
+  }
+
+  /* ---------- OUR STORY ---------- */
+  .story{
+    padding:110px 0 100px;
+    background:var(--cream);
+  }
+  .story .wrap{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:56px;
+    align-items:center;
+  }
+  .story-mark{
+    width:100%;
+    aspect-ratio:4/5;
+    border-radius:6px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 20px 40px rgba(90,36,56,0.18);
+  }
+  .story-mark img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .story h2{font-size:clamp(2rem,4vw,2.7rem); color:var(--wine); margin-bottom:22px;}
+  .story p{font-size:1.05rem; color:#5a3f39; max-width:52ch;}
+  .story p + p{margin-top:16px;}
+
+  @media (max-width:760px){
+    .story .wrap{grid-template-columns:1fr; text-align:left;}
+    .story-mark{max-width:280px; margin:0 auto;}
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery{
+    padding:100px 0 110px;
+    background:var(--cream-2);
+    text-align:center;
+  }
+  .gallery-head{margin-bottom:44px;}
+  .gallery-head h2{font-size:clamp(2rem,4vw,2.7rem); color:var(--wine); margin-top:10px;}
+  .slideshow{
+    position:relative;
+    max-width:640px;
+    margin:0 auto;
+    aspect-ratio:4/5;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 24px 50px rgba(90,36,56,0.2);
+    background:var(--wine);
+  }
+  .slide{
+    position:absolute; inset:0;
+    opacity:0;
+    transition:opacity 0.7s ease;
+  }
+  .slide.active{opacity:1;}
+  .slide img{width:100%; height:100%; object-fit:cover; display:block;}
+  .slide-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:rgba(255,246,236,0.85);
+    color:var(--wine);
+    border:none;
+    width:40px; height:40px;
+    border-radius:50%;
+    font-size:1.1rem;
+    cursor:pointer;
+    z-index:5;
+  }
+  .slide-arrow:hover{background:var(--cream);}
+  .slide-prev{left:14px;}
+  .slide-next{right:14px;}
+  .slide-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+  }
+  .slide-dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--blush);
+    border:none;
+    cursor:pointer;
+    padding:0;
+  }
+  .slide-dot.active{background:var(--sunset); width:22px; border-radius:5px; transition:all 0.25s ease;}
+
+  /* ---------- COUNTDOWN ---------- */
+  .countdown{
+    background:linear-gradient(180deg, var(--wine), var(--wine-2));
+    color:var(--cream);
+    padding:90px 0;
+    text-align:center;
+  }
+  .countdown .eyebrow{color:var(--gold);}
+  .countdown h2{font-size:clamp(1.7rem,3.6vw,2.3rem); margin:10px 0 40px; color:#FFF3E4;}
+  .count-grid{
+    display:flex;
+    justify-content:center;
+    gap:clamp(18px, 4vw, 48px);
+    flex-wrap:wrap;
+  }
+  .count-item{min-width:88px;}
+  .count-num{
+    font-family:'Playfair Display', serif;
+    font-size:clamp(2.4rem, 6vw, 3.6rem);
+    font-weight:700;
+    color:var(--gold);
+    line-height:1;
+  }
+  .count-label{
+    margin-top:8px;
+    font-size:0.7rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    opacity:0.85;
+  }
+
+  /* ---------- DETAILS ---------- */
+  .details{
+    padding:100px 0 110px;
+    background:var(--cream-2);
+  }
+  .details-head{text-align:center; margin-bottom:56px;}
+  .details-head h2{font-size:clamp(2rem,4vw,2.7rem); color:var(--wine); margin-top:10px;}
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+    gap:24px;
+  }
+  .detail-card{
+    background:var(--cream);
+    border:1px solid rgba(198,81,70,0.18);
+    border-radius:10px;
+    padding:32px 24px;
+    text-align:center;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .detail-card:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(90,36,56,0.1);}
+  .detail-icon{
+    width:46px; height:46px; margin:0 auto 16px;
+    border-radius:50%;
+    background:linear-gradient(160deg, var(--marigold), var(--sunset));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-family:'Playfair Display', serif; font-size:1.2rem;
+  }
+  .detail-card h3{font-size:1.15rem; color:var(--wine); margin-bottom:8px;}
+  .detail-card p{font-size:0.92rem; color:#7a5c50;}
+  .badge-soon{
+    display:inline-block;
+    margin-top:14px;
+    font-size:0.66rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--sunset);
+    border:1px solid var(--sunset);
+    border-radius:20px;
+    padding:4px 12px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--wine);
+    color:var(--cream);
+    text-align:center;
+    padding:56px 24px 40px;
+  }
+  footer .script{font-size:1.8rem; color:var(--gold); display:block; margin-bottom:6px;}
+  footer .foot-sub{font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; opacity:0.75;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .detail-card{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<button class="lang-toggle" id="langToggle" onclick="toggleLang()">ESPAÑOL</button>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow i18n" data-en="Save the Date" data-es="Reserva la Fecha">Save the Date</p>
+    <h1 class="hero-names">Patricia <span class="hero-amp">&amp;</span> Alexis</h1>
+    <p class="hero-date i18n" data-en="May 15, 2027" data-es="15 de mayo de 2027">May 15, 2027</p>
+    <p class="hero-venue">Superstition Manor</p>
+
+    <div class="cal-menu">
+      <button class="cal-btn i18n" data-en="+ Add to Calendar" data-es="+ Agregar al Calendario" onclick="document.getElementById('calOptions').classList.toggle('open')">+ Add to Calendar</button>
+      <div class="cal-options" id="calOptions">
+        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Patricia+%26+Alexis+Wedding&dates=20270515T000000/20270516T000000&location=1220+N+Signal+Butte+Rd%2C+Mesa%2C+AZ+85207&details=We're+getting+married!" target="_blank" class="i18n" data-en="Google Calendar" data-es="Google Calendar">Google Calendar</a>
+        <a href="#" id="icsLink" class="i18n" data-en="Apple / Outlook (.ics)" data-es="Apple / Outlook (.ics)">Apple / Outlook (.ics)</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll i18n" data-en="Scroll ↓" data-es="Desliza ↓">Scroll ↓</div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="story-mark"><img src="photos/photo7.jpg" alt="Patricia and Alexis"></div>
+    <div>
+      <p class="eyebrow i18n" data-en="Our Story" data-es="Nuestra Historia">Our Story</p>
+      <h2 class="i18n" data-en="How We Met" data-es="Cómo Nos Conocimos">How We Met</h2>
+      <p class="i18n" data-en="It started in high school, brought together by mutual friends. From the very first conversation, it felt like something had already been decided — an instant connection, almost like recognizing someone you'd known forever." data-es="Todo comenzó en la preparatoria, gracias a amigos en común. Desde la primera conversación, se sintió como si algo ya estuviera decidido — una conexión instantánea, casi como reconocer a alguien que ya conocías de toda la vida.">It started in high school, brought together by mutual friends. From the very first conversation, it felt like something had already been decided — an instant connection, almost like recognizing someone you'd known forever.</p>
+      <p class="i18n" data-en="We started out as friends, but the spark was there from the start — the kind of connection that's hard to ignore. About six months later, friends became something more, and we haven't looked back since." data-es="Empezamos como amigos, pero la chispa estuvo presente desde el principio — esa conexión difícil de ignorar. Unos seis meses después, la amistad se convirtió en algo más, y desde entonces no hemos mirado atrás.">We started out as friends, but the spark was there from the start — the kind of connection that's hard to ignore. About six months later, friends became something more, and we haven't looked back since.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="gallery-head">
+      <p class="eyebrow i18n" data-en="A Few Favorites" data-es="Algunos Favoritos">A Few Favorites</p>
+      <h2 class="i18n" data-en="The Proposal" data-es="La Propuesta">The Proposal</h2>
+    </div>
+    <div class="slideshow" id="slideshow">
+      <div class="slide active"><img src="photos/photo1.jpg" alt="Patricia and Alexis 1"></div>
+      <div class="slide"><img src="photos/photo2.jpg" alt="Patricia and Alexis 2"></div>
+      <div class="slide"><img src="photos/photo3.jpg" alt="Patricia and Alexis 3"></div>
+      <div class="slide"><img src="photos/photo4.jpg" alt="Patricia and Alexis 4"></div>
+      <div class="slide"><img src="photos/photo5.jpg" alt="Patricia and Alexis 5"></div>
+      <div class="slide"><img src="photos/photo6.jpg" alt="Patricia and Alexis 6"></div>
+      <div class="slide"><img src="photos/photo7.jpg" alt="Patricia and Alexis 7"></div>
+      <div class="slide"><img src="photos/photo8.jpg" alt="Patricia and Alexis 8"></div>
+      <button class="slide-arrow slide-prev" onclick="changeSlide(-1)" aria-label="Previous photo">&#8249;</button>
+      <button class="slide-arrow slide-next" onclick="changeSlide(1)" aria-label="Next photo">&#8250;</button>
+    </div>
+    <div class="slide-dots" id="slideDots"></div>
+  </div>
+</section>
+
+<section class="countdown">
+  <div class="wrap">
+    <p class="eyebrow i18n" data-en="Counting Down To" data-es="Cuenta Regresiva Para">Counting Down To</p>
+    <h2 class="i18n" data-en="Our Wedding Day" data-es="Nuestra Boda">Our Wedding Day</h2>
+    <div class="count-grid" id="countdown">
+      <div class="count-item"><div class="count-num" id="cd-days">--</div><div class="count-label i18n" data-en="Days" data-es="Días">Days</div></div>
+      <div class="count-item"><div class="count-num" id="cd-hours">--</div><div class="count-label i18n" data-en="Hours" data-es="Horas">Hours</div></div>
+      <div class="count-item"><div class="count-num" id="cd-mins">--</div><div class="count-label i18n" data-en="Minutes" data-es="Minutos">Minutes</div></div>
+      <div class="count-item"><div class="count-num" id="cd-secs">--</div><div class="count-label i18n" data-en="Seconds" data-es="Segundos">Seconds</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="details" id="details">
+  <div class="wrap">
+    <div class="details-head">
+      <p class="eyebrow i18n" data-en="More To Come" data-es="Más Detalles Pronto">More To Come</p>
+      <h2 class="i18n" data-en="Wedding Details" data-es="Detalles de la Boda">Wedding Details</h2>
+    </div>
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="detail-icon">C</div>
+        <h3 class="i18n" data-en="Ceremony" data-es="Ceremonia">Ceremony</h3>
+        <p>Superstition Manor<br>1220 N Signal Butte Rd<br>Mesa, AZ 85207</p>
+        <span class="badge-soon i18n" data-en="Details coming soon" data-es="Detalles próximamente">Details coming soon</span>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon">R</div>
+        <h3 class="i18n" data-en="Reception" data-es="Recepción">Reception</h3>
+        <p>Superstition Manor<br>1220 N Signal Butte Rd<br>Mesa, AZ 85207</p>
+        <span class="badge-soon i18n" data-en="Details coming soon" data-es="Detalles próximamente">Details coming soon</span>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon">S</div>
+        <h3 class="i18n" data-en="Stay" data-es="Hospedaje">Stay</h3>
+        <p class="i18n" data-en="Accommodations" data-es="Alojamiento">Accommodations</p>
+        <span class="badge-soon i18n" data-en="Details coming soon" data-es="Detalles próximamente">Details coming soon</span>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon">G</div>
+        <h3 class="i18n" data-en="Registry" data-es="Mesa de Regalos">Registry</h3>
+        <p class="i18n" data-en="Gift information" data-es="Información de regalos">Gift information</p>
+        <span class="badge-soon i18n" data-en="Details coming soon" data-es="Detalles próximamente">Details coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="script">Patricia &amp; Alexis</span>
+  <p class="foot-sub">05 · 15 · 2027 — Superstition Manor</p>
+</footer>
+
+<script>
+  const weddingDate = new Date("2027-05-15T00:00:00");
+  function updateCountdown(){
+    const now = new Date();
+    let diff = weddingDate - now;
+    if(diff < 0) diff = 0;
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff / (1000*60*60)) % 24);
+    const mins = Math.floor((diff / (1000*60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+    document.getElementById('cd-days').textContent = days;
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Build the .ics download link
+  const icsContent = [
+    "BEGIN:VCALENDAR","VERSION:2.0","BEGIN:VEVENT",
+    "SUMMARY:Patricia & Alexis Wedding",
+    "DTSTART:20270515T160000",
+    "DTEND:20270515T230000",
+    "LOCATION:1220 N Signal Butte Rd\\, Mesa\\, AZ 85207",
+    "DESCRIPTION:We're getting married!",
+    "END:VEVENT","END:VCALENDAR"
+  ].join("\r\n");
+  const icsBlob = new Blob([icsContent], {type: "text/calendar"});
+  document.getElementById('icsLink').href = URL.createObjectURL(icsBlob);
+  document.getElementById('icsLink').download = "patricia-alexis-wedding.ics";
+
+  // Gallery slideshow
+  const slides = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('slideDots');
+  let slideIndex = 0;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to photo ' + (i+1));
+    dot.onclick = () => goToSlide(i);
+    dotsWrap.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.slide-dot');
+  function showSlide(i){
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[i].classList.add('active');
+    dots[i].classList.add('active');
+  }
+  function changeSlide(dir){
+    slideIndex = (slideIndex + dir + slides.length) % slides.length;
+    showSlide(slideIndex);
+    resetAutoplay();
+  }
+  function goToSlide(i){
+    slideIndex = i;
+    showSlide(slideIndex);
+    resetAutoplay();
+  }
+  let autoplay = setInterval(() => changeSlide(1), 4500);
+  function resetAutoplay(){
+    clearInterval(autoplay);
+    autoplay = setInterval(() => changeSlide(1), 4500);
+  }
+
+  // Language toggle
+  let currentLang = "en";
+  function toggleLang(){
+    currentLang = currentLang === "en" ? "es" : "en";
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('.i18n').forEach(el => {
+      el.textContent = el.getAttribute('data-' + currentLang);
+    });
+    document.getElementById('langToggle').textContent = currentLang === "en" ? "ESPAÑOL" : "ENGLISH";
+  }
+</script>
+
+</body>
+</html>
